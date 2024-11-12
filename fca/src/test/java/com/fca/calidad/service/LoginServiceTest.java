@@ -9,6 +9,7 @@ import com.fca.calidad.service.LoginService;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+@SuppressWarnings("unused")
 class LoginServiceTest {
 
 	LoginService service;
@@ -48,10 +49,10 @@ assertThat(result2,is(false));
 dao=mock (IDAOUser.class);
 service=new LoginService(dao);
 User usuario = new User ("nombre1","email","123");
-when (dao.findByUserName("nombre1")).thenReturn(usuario);
+when (dao.findByUserName("nombre1")).thenReturn(null);
 
 //ejercicio 3 usuario no encontrado
-boolean result = service.login("", "321");
+boolean result = service.login("usuario2", "321");
 //verificacion
 assertThat(result,is(false));
 }
