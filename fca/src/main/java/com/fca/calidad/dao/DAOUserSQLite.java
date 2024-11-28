@@ -14,7 +14,7 @@ import com.fca.calidad.model.User;
 
 
 public class DAOUserSQLite implements IDAOUser {
-	private static final String DRIVER_NAME = "com.sqlite.jdbc.Driver";
+	private static final String DRIVER_NAME = "org.sqlite.JDBC";
     private static final String DB_URL = "jdbc:sqlite:C:\\Users\\mmcan\\IdeaProjects\\capas2\\\\Login.db";
 //mysql : "com.mysql.cj.jdbc.Driver"
     //mysql: jdbc:mysql://localhost:3307/calidad2024
@@ -25,7 +25,7 @@ public class DAOUserSQLite implements IDAOUser {
 			// Establish the driver connector
 			//Class.forName(DRIVER_NAME);
 			// Set the URI for connecting the MySql database
-			con = DriverManager.getConnection("jdbc:sqlite:/Users/RogerLopez/Documents/users.db", "", "");
+			con = DriverManager.getConnection("jdbc:sqlite:/Users/rogerlopez/Documents/users.db", "", "");
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -49,7 +49,7 @@ public class DAOUserSQLite implements IDAOUser {
 
 			// Obtain the pointer to the data in generated table
 			rs.next();
-
+if (rs.next()) {
 			int id = rs.getInt(1);
 			String username  = rs.getString(2);
 			String email = rs.getString(3);
@@ -70,7 +70,7 @@ public class DAOUserSQLite implements IDAOUser {
 			// Close connection with the database
 			connection.close();
 			rs.close();
-			preparedStatement.close();
+			preparedStatement.close();}
 
 		} catch (Exception e) {
 			System.out.println(e);
