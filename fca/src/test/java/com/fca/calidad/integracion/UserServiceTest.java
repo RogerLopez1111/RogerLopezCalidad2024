@@ -1,6 +1,7 @@
 package com.fca.calidad.integracion;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.dbunit.Assertion;
 import org.dbunit.DBTestCase;
 import org.dbunit.PropertiesBasedJdbcDatabaseTester;
 import org.dbunit.database.IDatabaseConnection;
@@ -87,8 +88,12 @@ void createUser2Test() {
 		ITable tablaReal = databaseDataSet.getTable("users");
 		String nombreReal = (String) tablaReal.getValue(0, "name");
 		String nombreEsperado = "name";
+		System.out.println("Real =" + nombreReal);
 		assertEquals(nombreReal, nombreEsperado);
-		
+		System.out.println("E=" + (String) tablaReal.getValue(0, "email"));
+		System.out.println("P=" + (String) tablaReal.getValue(0, "password"));
+		assertEquals((toString()), tablaReal.getValue(0, "email"),"email");
+		assertEquals((toString()), tablaReal.getValue(0, "password"),"password");
 	} catch (Exception e) {
 		fail("fallo create 2");
 		e.printStackTrace();
@@ -97,30 +102,29 @@ void createUser2Test() {
 
 	}
 @Test
+
 void createUser3Test() {
-	
-	//ejercicio del código
 	User usuario = userService.createUser("name", "email", "password");
-	
 	IDatabaseConnection connection;
 	try {
 		connection = getConnection();
 		IDataSet databaseDataSet = connection.createDataSet();
 		ITable tablaReal = databaseDataSet.getTable("users");
+		IDataSet exceptedDataSet = new FlatXmlDataSetBuilder().build(new FileInputStream("src/resources/usuarios.xml"));
+		ITable exceptedTable = exceptedDataSet.getTable("users");
 		
-		IDataSet expectedDataSet= new FlatXmlDataSetBuilder().build(new FileInputStream ("src/resources/initDB.xml"));
-		ITable expectedTable = expectedDataSet.getTable("users");
+		ITable filteredTable = DefaultColumnFilter.includedColumnsTable(tablaReal, exceptedTable.getTableMetaData().getColumns());
 		
-		ITable filteredTable = DefaultColumnFilter.includedColumnsTable(tablaReal, expectedTable.getTableMetaData().getColumns());
+		Assertion.assertEquals(filteredTable, exceptedTable);
+	}catch (Exception e) {
 		
-		assertEquals(filteredTable, expectedTable);
-		
-	} catch (Exception e) {
-		fail("fallo create 3");
 		e.printStackTrace();
+		fail("fallo create 3");
 	}
 
 
-	}
+}
+
+
 
 }
