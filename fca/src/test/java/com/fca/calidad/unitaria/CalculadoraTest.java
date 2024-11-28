@@ -39,7 +39,7 @@ class CalculadoraTest {
 	@Test
 	void multiplicanumeroporCeroTest() {
 		//inicializacion
-		double OP1 = 5;
+		double OP1 = 0;
 		double OP2 = 1;
 		double ResEsperada=0;
 		Calculadora calculadora = new Calculadora();

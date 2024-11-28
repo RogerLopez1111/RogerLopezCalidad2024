@@ -67,10 +67,10 @@ if (rs.next()) {
 			System.out.println("Nombre: " + result.getName());
 			System.out.println("Email: " + result.getEmail());
 			System.out.println("Tipo: " + result.isLogged() + "\n");
-			// Close connection with the database
+				}// Close connection with the database
 			connection.close();
 			rs.close();
-			preparedStatement.close();}
+			preparedStatement.close();
 
 		} catch (Exception e) {
 			System.out.println(e);
@@ -134,8 +134,7 @@ if (rs.next()) {
 			rs = preparedStatement.executeQuery();
 
 			// Obtain the pointer to the data in generated table
-			rs.next();
-
+			if (rs.next()) {
 			int id = rs.getInt(1);
 			String username  = rs.getString(2);
 			String emailUser = rs.getString(3);
@@ -153,7 +152,7 @@ if (rs.next()) {
 			System.out.println("Nombre: " + result.getName());
 			System.out.println("Email: " + result.getEmail());
 			System.out.println("Tipo: " + result.isLogged() + "\n");
-			// Close connection with the database
+			}// Close connection with the database
 			connection.close();
 			rs.close();
 			preparedStatement.close();
