@@ -57,7 +57,29 @@ public class crudTest {
     WebElement confirmationMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[3]/div/div[2]/form/div[4]/div/div")));
     assertEquals("Nice one!", confirmationMessage.getText());
   }
+  
 
+  
+  @Test
+  public void testEdit() throws Exception {
+    driver.get("https://mern-crud-mpfr.onrender.com/");
+    driver.findElement(By.xpath("//div[@id='root']/div/div[2]/table/tbody/tr[3]/td[5]/button")).click();
+    driver.findElement(By.name("age")).click();
+    driver.findElement(By.name("age")).click();
+    driver.findElement(By.name("age")).clear();
+    driver.findElement(By.name("age")).sendKeys("25");
+    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Gender'])[2]/following::div[2]")).click();
+    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Male'])[1]/following::div[2]")).click();
+    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Woah!'])[1]/following::button[1]")).click();
+  }
+ 
+  @Test
+  public void testDelete() throws Exception {
+    driver.get("https://mern-crud-mpfr.onrender.com/");
+    driver.findElement(By.xpath("//div[@id='root']/div/div[2]/table/tbody/tr/td[5]/button[2]")).click();
+    driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Roger Lopez Martinez'])[2]/following::button[1]")).click();    
+  }
+  
   @After
   public void tearDown() throws Exception {
     driver.quit();
