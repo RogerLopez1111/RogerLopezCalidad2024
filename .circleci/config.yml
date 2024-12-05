@@ -28,6 +28,10 @@ jobs:
       - run:
           name: Hola
           command: echo "hola"
+
+      - run:
+          name: Calculadora
+          command: mvn -Dtest-CalculadoraTest test
       # Then run your tests!
       - run:
           name: Test
