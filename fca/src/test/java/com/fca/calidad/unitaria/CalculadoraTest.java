@@ -51,13 +51,35 @@ class CalculadoraTest {
 		assertThat(ResEsperada, is(ResEjecucion));
 	}
 	
-	/*@Test
-	void testExpectedExceptionFail() {
-		NumberFormatException thrown = Assertions.assertThrows(NumberFormatException.class, ()-> {
-			Integer.parseInt("hola");
-		}, "NumberFormatException error was expected");
-	}*/
 	
+	@Test
+	void restaTest() {
+		//inicializacion
+		double OP1 = 1;
+		double OP2 = 1;
+		double ResEsperada=0;
+		Calculadora calculadora = new Calculadora();
+		
+		//Ejercicio llamar al metodo
+		double ResEjecucion= calculadora.resta(OP1, OP2);
+		
+		//Verificar
+		assertThat(ResEsperada, is(ResEjecucion));
+	}
+	@Test
+	void divTest() {
+		//inicializacion
+		double OP1 = 1;
+		double OP2 = 1;
+		double ResEsperada=1;
+		Calculadora calculadora = new Calculadora();
+		
+		//Ejercicio llamar al metodo
+		double ResEjecucion= calculadora.divide(OP1, OP2);
+		
+		//Verificar
+		assertThat(ResEsperada, is(ResEjecucion));
+	}
 	
 	@AfterEach
 	void print() {
